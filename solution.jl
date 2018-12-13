@@ -9,6 +9,17 @@ d = zeros(n, slots)
 w = zeros(n, slots)
 T = collect(1:1:slots)
 
+raw = readcsv("stigler.csv")
+(m,n) = size(raw)
+
+n_waitTimes = 2:n      # columns containing waitTimes
+n_rides = 3:m          # rows containing rides names
+
+waitTimes = raw[1,n_waitTimes][:]   # the list of waitTimes (convert to 1-D array)
+rides = raw[n_rides,1][:]           # the list of rides (convert to 1-D array)
+
+data = NamedArray( raw[n_rides,n_waitTimes], (rides,waitTimes), ("Rides","Wait Times") );
+
 m = Model(solver = IpoptSolver(print_level=0))
 
 @variable(m, x[1:n, 1:n, 1:slots], Bin)    # departures from i to j at time t
