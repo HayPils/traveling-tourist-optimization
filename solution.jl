@@ -1,5 +1,13 @@
 using JuMP, Ipopt
 
+A = [:hulk, :drdoom, :spiderman, :kong, :jurassic, :hp]
+n = length(A)
+slots = 44
+
+d = zeros(n, slots)
+
+w = zeros(n, slots)
+T = collect(1:1:slots)
 
 m = Model(solver = IpoptSolver(print_level=0))
 
