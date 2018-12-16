@@ -1,20 +1,11 @@
-$$\begin{bmatrix}
-      1 & 2 \\
-       3 & 4
-    \end{bmatrix}
-    \begin{bmatrix} x \\ y \end{bmatrix} =
-    \begin{bmatrix} 5 \\ 6 \end{bmatrix}$$
-
-And here is an example of an optimization problem in standard form:
 $$\begin{aligned}
-  \underset{x, y}{\text{minimize}}\qquad& \sum_{t\in T}\sum_{(i,j) \in X} d_{ij}x_{ij}^{t} + \sum_{i\in A}\left(\sum_{t\in T} \sum_{j\in A} tx_{ij}^{t} - \sum_{t\in T} ty_{i}^{t} \right)\\
-    \text{subject to:}\qquad& \sum_{t\in T} \sum_{j\in A} x_{ij}^{t} = 1 && \forall i \in A\\
-    & \sum_{t\in T} \sum_{i \in A} x_{ij}^{t} = 1 && \forall j \in A \\
-    & \sum_{t \in T} y_{i}^{t} = 1 && \forall i \in A, \quad i,t \neq 0 \\
-    & \sum_{j \in A} x_{ji}^{t - d_{ji}} \leq y_{i}^{t} && \forall i \in A, i \neq 0,\quad \forall t\in T, t-d_{ij} \geq 0 \\
-    & \sum_{j\in A} x_{ij}^{t} \le \sum_{k = 0}^{t} y_{i}^{k} && \forall i \in A, \quad \forall t \in T\\
-    & \sum_{j\in A} tx_{ij}^{t} - ty_{i}^{t} \geq y_{i}^{t} w_{i}^{t} && \forall i \in A, \quad \forall t \in T \\
-    & y_{0}^{0} = 1 \\
-    & x_{ij}^{t} \in \{0, 1\} && \forall i \in A, \quad \forall t \in T \\
-    & y_{i}^{t} \in \{0, 1\} && \forall i \in A, \quad \forall t \in T
-    \end{aligned}$$
+  \underset{x, y}{\text{minimize}}\qquad& \sum_{i\in A}\left(\sum_{t = 1}^{T} \sum_{j\in A} tx_{ij}^{t} - \sum_{t = 1}^{T} ty_{i}^{t} \right)\\
+    \text{subject to:}\qquad& \sum_{t = 1}^{T} \sum_{j\in A} x_{ij}^{t} = 1 && \forall i \in A\\
+    & \sum_{t = 1}^{T} \sum_{i \in A} x_{ij}^{t} = 1 && \forall j \in A \\
+    & \sum_{t = 1}^{T} y_{i}^{t} = 1 && \forall i \in A \\
+    & \sum_{i \in A} y_{i}^{t} \le 1 && \forall t \in \{ 1, \dots , T \}\\
+    & \sum_{j\in A} x_{ij}^{t} \le \sum_{k = 0}^{t} y_{i}^{k} && \forall i \in A, \quad \forall t \in \{ 1, \dots , T \}\\
+    & y_{i}^{t} w_{i}^{t} \le \gamma \sum_{j\in A} tx_{ij}^{t} - ty_{i}^{t} && \forall i \in A, \quad \forall t \in \{ 1, \dots , T \} \\
+    & x_{ij}^{t} \in \{0, 1\} && \forall i,j \in A, \quad \forall t \in \{ 1, \dots , T \} \\
+    & y_{i}^{t} \in \{0, 1\} && \forall i \in A, \quad \forall t \in \{ 1, \dots , T \}
+\end{aligned}$$
